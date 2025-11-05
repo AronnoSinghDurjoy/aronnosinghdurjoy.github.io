@@ -1,0 +1,16 @@
+.App {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* Global Section Styles */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
