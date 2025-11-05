@@ -2,7 +2,7 @@
   "name": "aronno-singh-durjoy-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://aronnosinghdurjoy.github.io/arnopsinghdurjoy_aronno_.github.io",
+  "homepage": "https://aronnosinghdurjoy.github.io",
   "dependencies": {
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
