@@ -1,50 +1,30 @@
 // Project Images Configuration
-// This file maps repository names to local images
+// Simply import your project screenshots from the assets/projects folder
 
-// Import your project screenshots here
-// Example:
+// Example: If you have table-insert.png in assets/projects/
 // import tableInsert from '../assets/projects/table-insert.png';
-// import portfolioWebsite from '../assets/projects/portfolio-website.jpg';
+// import anotherProject from '../assets/projects/another-project.jpg';
 
-// Map repository names (in lowercase, with hyphens) to imported images
+// Add your imports here:
+
+
+// Map repository names (lowercase with hyphens) to imported images
 export const projectImages = {
-  // Example mappings:
+  // Example:
   // 'table-insert': tableInsert,
-  // 'portfolio-website': portfolioWebsite,
-  // 'my-awesome-project': myAwesomeProject,
+  // 'another-project': anotherProject,
   
-  // Add your project images here following this pattern:
-  // 'repository-name': importedImage,
+  // Add your mappings here (must match GitHub repo name exactly, but lowercase):
 };
 
 /**
  * Get local project image by repository name
- * Checks both static imports and localStorage (from upload page)
  * @param {string} repoName - The repository name (e.g., 'table-insert')
  * @returns {string|null} - The image path or null if not found
  */
 export const getLocalProjectImage = (repoName) => {
   const normalizedName = repoName.toLowerCase();
-  
-  // First check static imports
-  if (projectImages[normalizedName]) {
-    return projectImages[normalizedName];
-  }
-  
-  // Then check localStorage (from upload page)
-  try {
-    const stored = localStorage.getItem('projectImages');
-    if (stored) {
-      const uploadedImages = JSON.parse(stored);
-      if (uploadedImages[normalizedName]) {
-        return uploadedImages[normalizedName];
-      }
-    }
-  } catch (error) {
-    console.error('Error reading from localStorage:', error);
-  }
-  
-  return null;
+  return projectImages[normalizedName] || null;
 };
 
 export default projectImages;
