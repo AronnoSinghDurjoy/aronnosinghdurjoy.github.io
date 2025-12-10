@@ -19,12 +19,32 @@ export const projectImages = {
 
 /**
  * Get local project image by repository name
+ * Checks both static imports and localStorage (from upload page)
  * @param {string} repoName - The repository name (e.g., 'table-insert')
  * @returns {string|null} - The image path or null if not found
  */
 export const getLocalProjectImage = (repoName) => {
   const normalizedName = repoName.toLowerCase();
-  return projectImages[normalizedName] || null;
+  
+  // First check static imports
+  if (projectImages[normalizedName]) {
+    return projectImages[normalizedName];
+  }
+  
+  // Then check localStorage (from upload page)
+  try {
+    const stored = localStorage.getItem('projectImages');
+    if (stored) {
+      const uploadedImages = JSON.parse(stored);
+      if (uploadedImages[normalizedName]) {
+        return uploadedImages[normalizedName];
+      }
+    }
+  } catch (error) {
+    console.error('Error reading from localStorage:', error);
+  }
+  
+  return null;
 };
 
 export default projectImages;
