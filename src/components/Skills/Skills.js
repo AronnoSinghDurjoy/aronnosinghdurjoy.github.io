@@ -6,7 +6,9 @@ import {
   FaJs, FaGitAlt, FaAws, FaJava 
 } from 'react-icons/fa';
 import { 
-  SiMysql, SiOracle, SiTableau
+  SiMysql, SiOracle, SiTableau, SiCplusplus, SiC,
+  SiApache, SiMicrosoftsqlserver, SiCanva, SiFigma,
+  SiAdobeillustrator, SiAdobexd, SiNetlify, SiGnubash
 } from 'react-icons/si';
 import { useTheme } from '../../context/ThemeContext';
 import './Skills.css';
@@ -17,29 +19,45 @@ const Skills = () => {
 
   const skillCategories = [
     {
-      category: 'Frontend',
+      category: 'Frontend & Web',
       skills: [
-        { name: 'HTML', icon: FaHtml5, level: 90, color: '#E34F26' },
-        { name: 'React', icon: FaReact, level: 85, color: '#61DAFB' },
-        { name: 'CSS', icon: FaCss3Alt, level: 88, color: '#1572B6' },
+        { name: 'HTML5', icon: FaHtml5, level: 90, color: '#E34F26' },
+        { name: 'CSS3', icon: FaCss3Alt, level: 88, color: '#1572B6' },
         { name: 'JavaScript', icon: FaJs, level: 85, color: '#F7DF1E' },
+        { name: 'React', icon: FaReact, level: 85, color: '#61DAFB' },
       ],
     },
     {
       category: 'Backend & Programming',
       skills: [
-        { name: 'Python', icon: FaPython, level: 82, color: '#3776AB' },
+        { name: 'C', icon: SiC, level: 80, color: '#A8B9CC' },
+        { name: 'C++', icon: SiCplusplus, level: 78, color: '#00599C' },
         { name: 'Java', icon: FaJava, level: 78, color: '#007396' },
+        { name: 'Python', icon: FaPython, level: 82, color: '#3776AB' },
+        { name: 'Bash Script', icon: SiGnubash, level: 75, color: '#4EAA25' },
+        { name: 'Apache Maven', icon: SiApache, level: 70, color: '#C71A36' },
       ],
     },
     {
-      category: 'Database & Tools',
+      category: 'Database & Cloud',
       skills: [
         { name: 'MySQL', icon: SiMysql, level: 85, color: '#4479A1' },
         { name: 'Oracle', icon: SiOracle, level: 80, color: '#F80000' },
-        { name: 'Tableau', icon: SiTableau, level: 75, color: '#E97627' },
-        { name: 'Git', icon: FaGitAlt, level: 88, color: '#F05032' },
+        { name: 'Oracle Developer', icon: SiOracle, level: 78, color: '#C74634' },
+        { name: 'MS SQL Server', icon: SiMicrosoftsqlserver, level: 75, color: '#CC2927' },
         { name: 'AWS', icon: FaAws, level: 70, color: '#FF9900' },
+      ],
+    },
+    {
+      category: 'Tools & Design',
+      skills: [
+        { name: 'Git', icon: FaGitAlt, level: 88, color: '#F05032' },
+        { name: 'Tableau', icon: SiTableau, level: 75, color: '#E97627' },
+        { name: 'Netlify', icon: SiNetlify, level: 85, color: '#00C7B7' },
+        { name: 'Figma', icon: SiFigma, level: 70, color: '#F24E1E' },
+        { name: 'Canva', icon: SiCanva, level: 80, color: '#00C4CC' },
+        { name: 'Illustrator', icon: SiAdobeillustrator, level: 65, color: '#FF9A00' },
+        { name: 'Adobe XD', icon: SiAdobexd, level: 70, color: '#FF61F6' },
       ],
     },
   ];

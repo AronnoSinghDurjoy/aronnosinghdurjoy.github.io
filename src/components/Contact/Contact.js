@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import { getProtectedEmail } from '../../config/email.config';
 import './Contact.css';
@@ -29,7 +29,17 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Create mailto link with form data
+    const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio');
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    const mailtoLink = `mailto:${getProtectedEmail()}?subject=${subject}&body=${body}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Reset form after short delay
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus('success');
@@ -38,7 +48,7 @@ const Contact = () => {
       setTimeout(() => {
         setSubmitStatus('');
       }, 3000);
-    }, 1500);
+    }, 500);
   };
 
   const contactInfo = [
@@ -47,12 +57,6 @@ const Contact = () => {
       title: 'Email',
       value: getProtectedEmail(),
       link: `mailto:${getProtectedEmail()}`,
-    },
-    {
-      icon: FaPhone,
-      title: 'Phone',
-      value: '+880 1234-567890',
-      link: 'tel:+8801234567890',
     },
     {
       icon: FaMapMarkerAlt,

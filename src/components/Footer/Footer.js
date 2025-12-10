@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFacebook, FaHeart } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import { getProtectedEmail } from '../../config/email.config';
 import './Footer.css';
@@ -12,7 +12,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: FaGithub, link: 'https://github.com/AronnoSinghDurjoy', label: 'GitHub' },
     { icon: FaLinkedin, link: 'https://www.linkedin.com/in/arnopsingharonno-464194213/', label: 'LinkedIn' },
-    { icon: FaTwitter, link: 'https://www.facebook.com/ArnopSinghAronno', label: 'Facebook' },
+    { icon: FaFacebook, link: 'https://www.facebook.com/ArnopSinghAronno', label: 'Facebook' },
   ];
 
   const quickLinks = [
@@ -87,10 +87,6 @@ const Footer = () => {
               <p>
                 <strong>Email:</strong><br />
                 {getProtectedEmail()}
-              </p>
-              <p>
-                <strong>Phone:</strong><br />
-                +880 1234-567890
               </p>
               <p>
                 <strong>Location:</strong><br />

@@ -24,10 +24,11 @@ const Experience = () => {
     },
     {
       title: 'ICT Teacher',
-      company: 'HSC (Higher Secondary School Certificate)',
+      company: 'Oracle Coaching Center - HSC (Higher Secondary School Certificate)',
       period: 'Mar 2024 - Oct 2024',
       description: [
-        'Taught HSC level ICT curriculum to college students preparing for board exams',
+        'Taught HSC level ICT curriculum to college students at Oracle Coaching Center',
+        'Prepared students for board exams with comprehensive ICT training',
         'Covered all syllabus topics including programming, database, and networking',
         'Designed comprehensive lesson plans aligned with HSC ICT syllabus',
         'Conducted practical lab sessions and hands-on computer training',

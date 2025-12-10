@@ -10,7 +10,7 @@ const About = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   const stats = [
-    { icon: FaCode, number: '15+', label: 'Projects Completed' },
+    { icon: FaCode, number: '20+', label: 'Projects Completed' },
     { icon: FaLaptopCode, number: '1+', label: 'Year Experience' },
     { icon: FaRocket, number: '10+', label: 'Happy Clients' },
     { icon: FaHeart, number: '100%', label: 'Client Satisfaction' },
