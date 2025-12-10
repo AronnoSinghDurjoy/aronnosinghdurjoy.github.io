@@ -48,10 +48,7 @@ const Projects = () => {
           // Try to fetch repository details for social preview image
           let socialImage = null;
           try {
-            const repoResponse = await fetch(`https://api.github.com/repos/AronnoSinghDurjoy/${repo.name}`);
-            const repoData = await repoResponse.json();
-            
-            // GitHub repositories can have a social preview image
+            // Check for screenshot in the repository
             // We'll check for it in the raw content URL pattern
             const possibleImageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/main/screenshot.png`;
             const imageCheck = await fetch(possibleImageUrl, { method: 'HEAD' });
