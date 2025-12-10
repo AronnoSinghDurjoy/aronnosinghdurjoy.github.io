@@ -1,6 +1,38 @@
-# How to Add Project Images - Simple Method
+# How to Add Project Images - Two Methods
 
-## Quick Steps
+## Method 1: Add Images to Each Repository (Recommended) ⭐
+
+Just add an image to the **root folder** of each repository on GitHub!
+
+### Supported Image Names:
+Your portfolio will automatically look for these files in order:
+
+1. `YourRepoName.png` (e.g., `Table-Insert-Portal.png`)
+2. `YourRepoName.jpg`
+3. `screenshot.png`
+4. `screenshot.jpg`
+5. `preview.png`
+6. `preview.jpg`
+
+### Example: For "Table-Insert-Portal" Repository
+
+1. Go to your repository: https://github.com/AronnoSinghDurjoy/Table-Insert-Portal
+2. Click "Add file" → "Upload files"
+3. Upload your image as **`TableInsert.png`** or **`screenshot.png`**
+4. Commit the file
+5. Done! ✅ Your portfolio will automatically display it!
+
+### Why This Method is Best:
+- ✅ No need to redeploy your portfolio
+- ✅ Images update automatically
+- ✅ Each project keeps its own image
+- ✅ Works immediately after committing to GitHub
+
+---
+
+## Method 2: Add Images to Portfolio Locally
+
+If you prefer to keep images in your portfolio project:
 
 ### 1. Add Your Screenshots to the Project
 
@@ -12,7 +44,6 @@ src/assets/projects/
 For example:
 - `src/assets/projects/table-insert.png`
 - `src/assets/projects/my-portfolio.jpg`
-- `src/assets/projects/todo-app.png`
 
 ### 2. Update projectImages.js
 
@@ -24,13 +55,11 @@ Add your imports and mappings:
 // Import your images
 import tableInsert from '../assets/projects/table-insert.png';
 import myPortfolio from '../assets/projects/my-portfolio.jpg';
-import todoApp from '../assets/projects/todo-app.png';
 
 // Map them to repository names (must match GitHub repo name, lowercase)
 export const projectImages = {
-  'table-insert': tableInsert,
+  'table-insert-portal': tableInsert,
   'aronnosinghdurjoy.github.io': myPortfolio,
-  'todo-app': todoApp,
 };
 ```
 
@@ -40,45 +69,36 @@ export const projectImages = {
 npm run deploy
 ```
 
-Done! Your images will now show in your portfolio! ✅
+---
+
+## Quick Comparison
+
+| Feature | Method 1 (Repo) | Method 2 (Local) |
+|---------|----------------|------------------|
+| Setup | Very Easy | Easy |
+| Update Speed | Instant | Need redeploy |
+| Image Location | In each repo | In portfolio |
+| Best For | Quick updates | Full control |
 
 ---
 
 ## Important Notes
 
-- **Repository Name**: Use the exact name from GitHub (but lowercase with hyphens)
-- **Image Format**: PNG, JPG, or WebP
+- **Image Format**: PNG, JPG, or JPEG
 - **Image Size**: Keep under 500KB for best performance
 - **Aspect Ratio**: 16:9 (e.g., 1200x675px) works best
+- **Location**: Root folder of repository (not in subfolders)
 
 ---
 
-## Example: Adding Table Insert Image
+## Example: Table Insert Portal
 
-1. Save your screenshot as: `g:\React Final Portfolio\src\assets\projects\table-insert.png`
+Your repository: `Table-Insert-Portal`
 
-2. Edit `src/config/projectImages.js`:
-   ```javascript
-   import tableInsert from '../assets/projects/table-insert.png';
-   
-   export const projectImages = {
-     'table-insert': tableInsert,
-   };
-   ```
+**Option A:** Upload `TableInsert.png` to the root of the repository ✅ (Easiest)
 
-3. Run: `npm run deploy`
+**Option B:** Upload `screenshot.png` to the root of the repository ✅
 
-4. Visit your portfolio - the image will appear! 🎉
+**Option C:** Save locally as `table-insert-portal.png` and use Method 2
 
----
-
-## Find Your Repository Names
-
-Visit: https://github.com/AronnoSinghDurjoy
-
-Copy the exact repository name from GitHub, then convert to lowercase for the mapping.
-
-Examples:
-- `Table-Insert` → use `'table-insert'`
-- `MyProject` → use `'myproject'`
-- `todo_app` → use `'todo_app'`
+All three options will work!

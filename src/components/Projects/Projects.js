@@ -45,30 +45,61 @@ const Projects = () => {
         .filter(repo => !repo.fork && !repo.archived)
         .slice(0, 12)
         .map(async (repo) => {
-          // Try to fetch repository details for social preview image
-          let socialImage = null;
+          // Try to fetch image from repository
+          let repoImage = null;
+          
           try {
-            // Check for screenshot in the repository
-            // We'll check for it in the raw content URL pattern
-            const possibleImageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/main/screenshot.png`;
-            const imageCheck = await fetch(possibleImageUrl, { method: 'HEAD' });
+            // List of possible image names to check
+            const possibleImageNames = [
+              `${repo.name}.png`,
+              `${repo.name}.jpg`,
+              `${repo.name}.jpeg`,
+              'TableInsert.png',  // For Table-Insert-Portal
+              'screenshot.png',
+              'screenshot.jpg',
+              'preview.png',
+              'preview.jpg',
+            ];
             
-            if (imageCheck.ok) {
-              socialImage = possibleImageUrl;
-            } else {
-              // Try alternative paths
-              const altUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/master/screenshot.png`;
-              const altCheck = await fetch(altUrl, { method: 'HEAD' });
-              if (altCheck.ok) socialImage = altUrl;
+            // Check main branch first
+            for (const imageName of possibleImageNames) {
+              const imageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/main/${imageName}`;
+              try {
+                const imageCheck = await fetch(imageUrl, { method: 'HEAD' });
+                if (imageCheck.ok) {
+                  repoImage = imageUrl;
+                  console.log(`✅ Found image for ${repo.name}: ${imageName}`);
+                  break;
+                }
+              } catch (err) {
+                // Continue to next image name
+              }
+            }
+            
+            // If not found in main, try master branch
+            if (!repoImage) {
+              for (const imageName of possibleImageNames) {
+                const imageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/master/${imageName}`;
+                try {
+                  const imageCheck = await fetch(imageUrl, { method: 'HEAD' });
+                  if (imageCheck.ok) {
+                    repoImage = imageUrl;
+                    console.log(`✅ Found image for ${repo.name}: ${imageName} (master branch)`);
+                    break;
+                  }
+                } catch (err) {
+                  // Continue to next image name
+                }
+              }
             }
           } catch (err) {
-            console.log(`No screenshot found for ${repo.name}`);
+            console.log(`No image found for ${repo.name}`);
           }
 
           return {
             title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
             description: repo.description || 'A cool project built with passion and code',
-            image: getLocalProjectImage(repo.name) || socialImage || getProjectImage(repo.name, repo.language),
+            image: getLocalProjectImage(repo.name) || repoImage || getProjectImage(repo.name, repo.language),
             tags: [
               repo.language || 'Code',
               ...(repo.topics || []).slice(0, 3)
