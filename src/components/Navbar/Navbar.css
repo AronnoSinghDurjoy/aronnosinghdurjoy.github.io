@@ -163,45 +163,195 @@
 }
 
 @media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: var(--bg-secondary);
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    transition: right 0.3s ease;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-  }
-
-  .light .nav-menu {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .dark .nav-menu {
-    background: rgba(17, 24, 39, 0.98);
-    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
-  }
-
-  .nav-menu.active {
-    right: 0;
+  .desktop-menu {
+    display: none;
   }
 
   .mobile-menu-icon {
     display: block;
   }
+}
 
-  .nav-item {
-    width: 100%;
-    text-align: center;
-  }
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 998;
+}
 
-  .nav-item a {
-    font-size: 1.3rem;
+/* Mobile Navigation Menu */
+.mobile-nav-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 85%;
+  max-width: 350px;
+  height: 100vh;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.mobile-nav-menu.light {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+
+.mobile-nav-menu.dark {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
+.mobile-menu-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-header h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.mobile-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.mobile-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-nav-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobile-nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-nav-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item:hover .mobile-nav-icon {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark .mobile-nav-icon {
+  background: linear-gradient(135deg, #06b6d4, #10b981);
+}
+
+.mobile-nav-text {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.mobile-menu-footer {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-theme-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-theme-toggle svg {
+  font-size: 1.3rem;
+}
+
+/* Decorative curved shape */
+.mobile-menu-curve {
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  width: 200%;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50% 50% 0 0;
+  z-index: 1;
+}
+
+.dark .mobile-menu-curve {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+/* Hide the old nav-menu on mobile */
+@media (max-width: 768px) {
+  .nav-menu.desktop-menu {
+    display: none;
   }
 }
