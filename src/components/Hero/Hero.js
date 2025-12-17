@@ -106,7 +106,7 @@ const Hero = () => {
               View Portfolio
             </motion.a>
             <motion.a
-              href="/resume.pdf"
+              href="/Arnop-Singh-Durjoy-2025.pdf"
               className="btn btn-outline"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
