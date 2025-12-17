@@ -17,29 +17,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (isOpen && !e.target.closest('.nav-menu') && !e.target.closest('.mobile-menu-icon')) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [isOpen]);
-
-  // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
-
   const navItems = [
     { name: 'Home', icon: FaHome },
     { name: 'About', icon: FaUser },
@@ -57,172 +34,108 @@ const Navbar = () => {
     }
   };
 
-  const menuVariants = {
-    closed: {
-      clipPath: 'circle(0% at 100% 0%)',
-      transition: {
-        type: 'spring',
-        stiffness: 400,
-        damping: 40,
-      },
-    },
-    open: {
-      clipPath: 'circle(150% at 100% 0%)',
-      transition: {
-        type: 'spring',
-        stiffness: 20,
-        restDelta: 2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    closed: { x: 50, opacity: 0 },
-    open: (i) => ({
-      x: 0,
-      opacity: 1,
-      transition: {
-        delay: i * 0.1,
-        type: 'spring',
-        stiffness: 100,
-      },
-    }),
-  };
-
   return (
-    <>
-      <motion.nav
-        className={`navbar ${scrolled ? 'scrolled' : ''} ${isDark ? 'dark' : 'light'}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="nav-container">
-          <motion.div
-            className="nav-logo"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection('home')}
-          >
-            <h1 className="logo-text">Aro</h1>
-          </motion.div>
+    <motion.nav
+      className={`navbar ${scrolled ? 'scrolled' : ''} ${isDark ? 'dark' : 'light'}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="nav-container">
+        <motion.div
+          className="nav-logo"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => scrollToSection('home')}
+        >
+          <h1 className="logo-text">Aro</h1>
+        </motion.div>
 
-          <div className="nav-menu desktop-menu">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.name}
-                className="nav-item"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
+        {/* Desktop Menu */}
+        <div className="nav-menu desktop-menu">
+          {navItems.map((item, index) => (
+            <motion.div
+              key={item.name}
+              className="nav-item"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <a
+                href={`#${item.name.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.name);
+                }}
               >
-                <a
-                  href={`#${item.name.toLowerCase()}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.name);
-                  }}
-                >
-                  {item.name}
-                </a>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="nav-right">
-            <motion.button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {isDark ? <FaSun /> : <FaMoon />}
-            </motion.button>
-
-            <motion.button
-              className="mobile-menu-icon"
-              onClick={() => setIsOpen(!isOpen)}
-              whileTap={{ scale: 0.9 }}
-            >
-              {isOpen ? <FaTimes /> : <FaBars />}
-            </motion.button>
-          </div>
+                {item.name}
+              </a>
+            </motion.div>
+          ))}
         </div>
-      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="mobile-menu-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+        <div className="nav-right">
+          <motion.button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            whileHover={{ scale: 1.1, rotate: 180 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isDark ? <FaSun /> : <FaMoon />}
+          </motion.button>
+
+          <motion.button
+            className="mobile-menu-icon"
+            onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isOpen ? <FaTimes /> : <FaBars />}
+          </motion.button>
+        </div>
+      </div>
 
       {/* Mobile Menu */}
-      <motion.div
-        className={`mobile-nav-menu ${isDark ? 'dark' : 'light'}`}
-        variants={menuVariants}
-        initial="closed"
-        animate={isOpen ? 'open' : 'closed'}
-      >
-        <div className="mobile-menu-content">
-          <div className="mobile-menu-header">
-            <h2>Menu</h2>
-            <motion.button
-              className="mobile-close-btn"
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              className="mobile-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
+            />
+            <motion.div
+              className={`mobile-menu ${isDark ? 'dark' : 'light'}`}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
             >
-              <FaTimes />
-            </motion.button>
-          </div>
-
-          <div className="mobile-nav-items">
-            {navItems.map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={item.name}
-                  className="mobile-nav-item"
-                  custom={index}
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, x: 10 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => scrollToSection(item.name)}
-                >
-                  <div className="mobile-nav-icon">
-                    <IconComponent />
-                  </div>
-                  <span className="mobile-nav-text">{item.name}</span>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <div className="mobile-menu-footer">
-            <motion.button
-              className="mobile-theme-toggle"
-              onClick={toggleTheme}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isDark ? <FaSun /> : <FaMoon />}
-              <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Decorative curved shape */}
-        <div className="mobile-menu-curve"></div>
-      </motion.div>
-    </>
+              <div className="mobile-menu-items">
+                {navItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <motion.div
+                      key={item.name}
+                      className="mobile-menu-item"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => scrollToSection(item.name)}
+                    >
+                      <IconComponent className="mobile-item-icon" />
+                      <span>{item.name}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
