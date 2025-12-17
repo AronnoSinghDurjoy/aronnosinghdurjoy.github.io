@@ -40,6 +40,20 @@ const Projects = () => {
       const response = await fetch('https://api.github.com/users/AronnoSinghDurjoy/repos?sort=updated&per_page=100');
       const data = await response.json();
       
+      // List of repos known to have images (add more as needed)
+      const reposWithImages = [
+        'QuickTransmute',
+        'Dealer_info_portal',
+        'Transection-Portal',
+        'Savoy-Ice-cream-dataentry',
+        'Retailer-Location',
+        'Zone-Dim-Updater',
+        'Call-Drop-Report-Automated',
+        'Hotel-Royal',
+        'CDR-Portal',
+        'Classy-Portfolio'
+      ];
+      
       // Fetch detailed repo info for images
       const formattedProjectsPromises = data
         .filter(repo => !repo.fork && !repo.archived)
@@ -48,52 +62,18 @@ const Projects = () => {
           // Try to fetch image from repository
           let repoImage = null;
           
-          try {
-            // List of possible image names to check
-            const possibleImageNames = [
-              `${repo.name}.png`,
-              `${repo.name}.jpg`,
-              `${repo.name}.jpeg`,
-              'TableInsert.png',  // For Table-Insert-Portal
-              'screenshot.png',
-              'screenshot.jpg',
-              'preview.png',
-              'preview.jpg',
-            ];
-            
-            // Check main branch first
-            for (const imageName of possibleImageNames) {
-              const imageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/main/${imageName}`;
-              try {
-                const imageCheck = await fetch(imageUrl, { method: 'HEAD' });
-                if (imageCheck.ok) {
-                  repoImage = imageUrl;
-                  console.log(`✅ Found image for ${repo.name}: ${imageName}`);
-                  break;
-                }
-              } catch (err) {
-                // Continue to next image name
+          // Only check for images if the repo is in our known list
+          if (reposWithImages.includes(repo.name)) {
+            try {
+              // Try the most common pattern first: RepoName.png
+              const imageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/main/${repo.name}.png`;
+              const imageCheck = await fetch(imageUrl, { method: 'HEAD' });
+              if (imageCheck.ok) {
+                repoImage = imageUrl;
               }
+            } catch (err) {
+              // Silent fail - use fallback
             }
-            
-            // If not found in main, try master branch
-            if (!repoImage) {
-              for (const imageName of possibleImageNames) {
-                const imageUrl = `https://raw.githubusercontent.com/AronnoSinghDurjoy/${repo.name}/master/${imageName}`;
-                try {
-                  const imageCheck = await fetch(imageUrl, { method: 'HEAD' });
-                  if (imageCheck.ok) {
-                    repoImage = imageUrl;
-                    console.log(`✅ Found image for ${repo.name}: ${imageName} (master branch)`);
-                    break;
-                  }
-                } catch (err) {
-                  // Continue to next image name
-                }
-              }
-            }
-          } catch (err) {
-            console.log(`No image found for ${repo.name}`);
           }
 
           return {

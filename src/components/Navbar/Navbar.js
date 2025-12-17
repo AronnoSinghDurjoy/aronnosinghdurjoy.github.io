@@ -35,67 +35,69 @@ const Navbar = () => {
   };
 
   return (
-    <motion.nav
-      className={`navbar ${scrolled ? 'scrolled' : ''} ${isDark ? 'dark' : 'light'}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="nav-container">
-        <motion.div
-          className="nav-logo"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => scrollToSection('home')}
-        >
-          <h1 className="logo-text">Aro</h1>
-        </motion.div>
+    <>
+      <motion.nav
+        className={`navbar ${scrolled ? 'scrolled' : ''} ${isDark ? 'dark' : 'light'}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="nav-container">
+          <motion.div
+            className="nav-logo"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('home')}
+          >
+            <h1 className="logo-text">Aro</h1>
+          </motion.div>
 
-        {/* Desktop Menu */}
-        <div className="nav-menu desktop-menu">
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item.name}
-              className="nav-item"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.1 }}
-            >
-              <a
-                href={`#${item.name.toLowerCase()}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.name);
-                }}
+          {/* Desktop Menu */}
+          <div className="nav-menu desktop-menu">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item.name}
+                className="nav-item"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.1 }}
               >
-                {item.name}
-              </a>
-            </motion.div>
-          ))}
+                <a
+                  href={`#${item.name.toLowerCase()}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.name);
+                  }}
+                >
+                  {item.name}
+                </a>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="nav-right">
+            <motion.button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {isDark ? <FaSun /> : <FaMoon />}
+            </motion.button>
+
+            <motion.button
+              className="mobile-menu-icon"
+              onClick={() => setIsOpen(!isOpen)}
+              whileTap={{ scale: 0.9 }}
+            >
+              {isOpen ? <FaTimes /> : <FaBars />}
+            </motion.button>
+          </div>
         </div>
+      </motion.nav>
 
-        <div className="nav-right">
-          <motion.button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            whileHover={{ scale: 1.1, rotate: 180 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {isDark ? <FaSun /> : <FaMoon />}
-          </motion.button>
-
-          <motion.button
-            className="mobile-menu-icon"
-            onClick={() => setIsOpen(!isOpen)}
-            whileTap={{ scale: 0.9 }}
-          >
-            {isOpen ? <FaTimes /> : <FaBars />}
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Outside nav for proper z-index */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -135,7 +137,7 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   );
 };
 
