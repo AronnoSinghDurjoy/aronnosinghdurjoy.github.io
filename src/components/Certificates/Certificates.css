@@ -1,19 +1,16 @@
 .certificates {
   padding: 100px 20px;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   transition: background-color 0.3s ease;
 }
 
 .certificates.light {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: transparent;
   color: #333;
 }
 
 .certificates.dark {
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  background: transparent;
   color: #e0e0e0;
 }
 
@@ -64,14 +61,25 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .certificates.light .certificate-card {
   background: white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.certificate-card:hover {
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.4);
+}
+
+.certificates.light .certificate-card:hover {
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
 }
 
 .certificate-image-wrapper {
@@ -85,16 +93,42 @@
   height: auto;
   display: block;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .certificate-card:hover .certificate-image {
-  transform: scale(1.02);
+  transform: scale(1.03);
+}
+
+.certificate-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  transition: transform 0.6s;
+}
+
+.certificate-card:hover .certificate-shine {
+  transform: translateX(100%) translateY(100%) rotate(45deg);
 }
 
 .certificate-info {
   padding: 25px;
   text-align: center;
+  background: linear-gradient(to top, rgba(102, 126, 234, 0.05), transparent);
+  transition: all 0.4s ease;
+}
+
+.certificate-card:hover .certificate-info {
+  background: linear-gradient(to top, rgba(102, 126, 234, 0.1), transparent);
 }
 
 .certificate-info h3 {

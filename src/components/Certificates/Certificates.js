@@ -16,7 +16,7 @@ const Certificates = () => {
       id: 1,
       title: 'Professional Experience Certificate',
       image: Certificate1,
-      description: 'Teletalk Bangladesh Limited - Software Business Intelligence',
+      description: 'Teletalk Bangladesh Limited - Inventory Assessment Software',
     },
     {
       id: 2,
@@ -71,11 +71,12 @@ const Certificates = () => {
               key={cert.id}
               className="certificate-card"
               variants={itemVariants}
-              whileHover={{ scale: 1.02, translateY: -5 }}
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.03, translateY: -10, rotateY: 5 }}
+              transition={{ duration: 0.4, type: 'spring', stiffness: 300 }}
             >
               <div className="certificate-image-wrapper">
                 <img src={cert.image} alt={cert.title} className="certificate-image" />
+                <div className="certificate-shine"></div>
               </div>
               <div className="certificate-info">
                 <h3>{cert.title}</h3>

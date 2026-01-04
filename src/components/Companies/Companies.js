@@ -1,86 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { useTheme } from '../../context/ThemeContext';
-import { FaBriefcase } from 'react-icons/fa';
 import TeletalkLogo from '../../assets/TeleTalk-Logo.png';
 import './Companies.css';
 
 const Companies = () => {
   const { isDark } = useTheme();
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   const companies = [
     {
       id: 1,
       name: 'Teletalk Bangladesh Limited',
       logo: TeletalkLogo,
-      description: 'Developed Inventory & Asset Management Software',
-      period: 'October 2024 - December 2025',
-      role: 'Software Business Intelligence Developer',
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
+  // Duplicate logos for seamless infinite scroll effect
+  const duplicatedCompanies = [...companies, ...companies, ...companies];
 
   return (
-    <section className={`companies ${isDark ? 'dark' : 'light'}`} id="companies">
-      <div className="companies-container">
+    <section className={`companies-carousel ${isDark ? 'dark' : 'light'}`}>
+      <div className="companies-carousel-container">
         <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: -20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          className="carousel-track"
+          animate={{
+            x: [0, -33.33 + '%'],
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: 'loop',
+              duration: 15,
+              ease: 'linear',
+            },
+          }}
         >
-          <FaBriefcase className="section-icon" />
-          <h2>Companies I've Worked With</h2>
-          <div className="section-divider"></div>
-        </motion.div>
-
-        <motion.div
-          ref={ref}
-          className="companies-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-        >
-          {companies.map((company) => (
-            <motion.div
-              key={company.id}
-              className="company-card"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="company-logo-wrapper">
-                <img src={company.logo} alt={company.name} className="company-logo" />
-                <div className="company-overlay">
-                  <div className="company-details">
-                    <h3>{company.name}</h3>
-                    <p className="company-role">{company.role}</p>
-                    <p className="company-period">{company.period}</p>
-                    <p className="company-description">{company.description}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          {duplicatedCompanies.map((company, index) => (
+            <div key={index} className="company-logo-item">
+              <img src={company.logo} alt={company.name} />
+            </div>
           ))}
         </motion.div>
       </div>
