@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.01ff9d31.css",
-    "main.js": "/static/js/main.624bcc6e.js",
+    "main.css": "/static/css/main.0fe242ce.css",
+    "main.js": "/static/js/main.b1b4263a.js",
     "static/media/Certificate1.jpg": "/static/media/Certificate1.0fdb88abda37aa900b10.jpg",
     "static/media/Certificate2.jpg": "/static/media/Certificate2.db3af7508a9b5df185b9.jpg",
     "static/media/profile.jpg": "/static/media/profile.61388f34984501745904.jpg",
+    "static/media/TeleTalk-Logo.png": "/static/media/TeleTalk-Logo.5b967cb48e4e7354937f.png",
     "index.html": "/index.html",
-    "main.01ff9d31.css.map": "/static/css/main.01ff9d31.css.map",
-    "main.624bcc6e.js.map": "/static/js/main.624bcc6e.js.map"
+    "main.0fe242ce.css.map": "/static/css/main.0fe242ce.css.map",
+    "main.b1b4263a.js.map": "/static/js/main.b1b4263a.js.map"
   },
   "entrypoints": [
-    "static/css/main.01ff9d31.css",
-    "static/js/main.624bcc6e.js"
+    "static/css/main.0fe242ce.css",
+    "static/js/main.b1b4263a.js"
   ]
 }
