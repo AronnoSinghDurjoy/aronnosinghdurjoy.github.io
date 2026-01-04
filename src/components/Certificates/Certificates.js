@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTheme } from '../../context/ThemeContext';
-import { FaAward, FaDownload } from 'react-icons/fa';
+import { FaAward } from 'react-icons/fa';
 import Certificate1 from '../../assets/Certificate1.jpg';
 import Certificate2 from '../../assets/Certificate2.jpg';
 import './Certificates.css';
@@ -14,15 +14,15 @@ const Certificates = () => {
   const certificates = [
     {
       id: 1,
-      title: 'Certificate 1',
+      title: 'Professional Experience Certificate',
       image: Certificate1,
-      description: 'Professional Certificate',
+      description: 'Teletalk Bangladesh Limited - Software Business Intelligence',
     },
     {
       id: 2,
-      title: 'Certificate 2',
+      title: 'Work Reference Certificate',
       image: Certificate2,
-      description: 'Achievement Certificate',
+      description: 'Teletalk Bangladesh Limited - BI Operations',
     },
   ];
 
@@ -76,17 +76,6 @@ const Certificates = () => {
             >
               <div className="certificate-image-wrapper">
                 <img src={cert.image} alt={cert.title} className="certificate-image" />
-                <div className="certificate-overlay">
-                  <a 
-                    href={cert.image} 
-                    download={`${cert.title}.jpg`}
-                    className="download-btn"
-                    aria-label={`Download ${cert.title}`}
-                  >
-                    <FaDownload />
-                    <span>Download</span>
-                  </a>
-                </div>
               </div>
               <div className="certificate-info">
                 <h3>{cert.title}</h3>

@@ -6,6 +6,7 @@ import About from './components/About/About';
 import Skills from './components/Skills/Skills';
 import Projects from './components/Projects/Projects';
 import Experience from './components/Experience/Experience';
+import Companies from './components/Companies/Companies';
 import Certificates from './components/Certificates/Certificates';
 import Quotes from './components/Quotes/Quotes';
 import Contact from './components/Contact/Contact';
@@ -37,6 +38,7 @@ function App() {
             <Skills />
             <Projects />
             <Experience />
+            <Companies />
             <Certificates />
             <Quotes />
             <Contact />

@@ -78,62 +78,18 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  aspect-ratio: 16/11;
 }
 
 .certificate-image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .certificate-card:hover .certificate-image {
-  transform: scale(1.05);
-}
-
-.certificate-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.certificate-card:hover .certificate-overlay {
-  opacity: 1;
-}
-
-.download-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.download-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-}
-
-.download-btn svg {
-  font-size: 1.2rem;
+  transform: scale(1.02);
 }
 
 .certificate-info {
